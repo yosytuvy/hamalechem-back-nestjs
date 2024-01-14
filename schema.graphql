@@ -1,0 +1,37 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Donation model"""
+type Donation {
+  _id: ID!
+  name: String!
+  category: String!
+  image: String!
+  location: String!
+  publisherId: String!
+  phone: String!
+  details: String!
+  flexible: Boolean!
+}
+
+type Query {
+  donation(_id: ID!): Donation!
+  donations: [Donation!]!
+  testRedis: String!
+}
+
+type Mutation {
+  addDonation(addDonation: addDonationInput!): Donation!
+}
+
+input addDonationInput {
+  name: String!
+  category: String!
+  image: String!
+  location: String!
+  publisherId: String!
+  phone: String!
+  details: String!
+  flexible: Boolean!
+}
