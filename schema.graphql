@@ -18,7 +18,6 @@ type Donation {
 type Query {
   donation(_id: ID!): Donation!
   donations: [Donation!]!
-  testRedis: String!
 }
 
 type Mutation {

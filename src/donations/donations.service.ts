@@ -25,10 +25,8 @@ export class DonationsService {
   }
 
   async findOne(id) {
-    // await this.cacheManager.set(`test2`, "test");
-    const donationFromDB = this.donationModel.findById(id);
-    console.log("donation from db!");
-    
+    await this.cacheManager.set(`test2`, "test");
+    const donationFromDB = this.donationModel.findById(id);    
     return donationFromDB
   }
 }

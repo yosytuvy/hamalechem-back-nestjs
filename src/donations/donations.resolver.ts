@@ -5,7 +5,9 @@ import { addDonationInput } from './models/addDonation.model';
 import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { RoleGuard, Roles } from 'src/auth/guards/role.guard';
-import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { GraphQlInterceptor } from './interceptors/graphQL.interceptor';
+import { GraphQlcecheKey } from './decorators/graphQLCecheKey.decorator';
 
 @Resolver((of) => Donation)
 export class DonationsResolver {
@@ -13,12 +15,15 @@ export class DonationsResolver {
 
   @Query((returns) => Donation)
   @UseGuards(JwtGuard, new RoleGuard(Roles.SOLIDER))
-  // @UseInterceptors(CacheInterceptor)
+  @UseInterceptors(GraphQlInterceptor)
+  @GraphQlcecheKey('donation')
   async donation(@Args('_id', { type: () => ID }) _id: string) {
     return this.donationsService.findOne(_id);
   }
 
   @Query((returns) => [Donation])
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('donations')
   async donations() {
     return this.donationsService.findAll();
   }
@@ -26,11 +31,5 @@ export class DonationsResolver {
   @Mutation((returns) => Donation)
   async addDonation(@Args('addDonation') addDonation: addDonationInput) {
     return this.donationsService.create(addDonation);
-  }
-
-  @Query((returns) => String)
-  @UseInterceptors(CacheInterceptor)
-  async testRedis(){
-    return 'hello';
   }
 }
