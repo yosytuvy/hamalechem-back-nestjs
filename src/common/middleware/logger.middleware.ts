@@ -4,9 +4,10 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-
     // Filter the ApolloServer connections requests
     if (req.body.operationName !== 'IntrospectionQuery') {
+      console.log('----------------------------------------------');
+
       // Request logging
       console.log(`${req.method} ${req.originalUrl}`);
 
