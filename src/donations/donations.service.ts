@@ -17,7 +17,7 @@ export class DonationsService {
     const createDonation = new this.donationModel(createDonationDto);
     const newDonation = createDonation.save();
     await this.cacheManager.reset();
-    return newDonation
+    return newDonation;
   }
 
   async findAll() {
@@ -25,8 +25,7 @@ export class DonationsService {
   }
 
   async findOne(id) {
-    await this.cacheManager.set(`test2`, "test");
-    const donationFromDB = this.donationModel.findById(id);    
-    return donationFromDB
+    const donationFromDB = this.donationModel.findById(id);
+    return donationFromDB;
   }
 }

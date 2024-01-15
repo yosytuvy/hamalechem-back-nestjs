@@ -22,9 +22,12 @@ export class GraphQlInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler,
   ): Promise<Observable<any>> {
+
+    // Extract the request from the GraphQL context.
     const ctx = GqlExecutionContext.create(context).getContext();
     const itemId = ctx.req.body.variables.id;
 
+    // Get the argument from the GraphQlcecheKey decotator
     const key = this.reflector.get('graphQLCecheKey', context.getHandler());
 
     const cached = await this.cacheManager.get(`${key}:${itemId}`);
