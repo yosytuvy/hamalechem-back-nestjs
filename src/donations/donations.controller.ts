@@ -24,42 +24,18 @@ export class DonationsController {
   @Get()
   @UseInterceptors(CacheInterceptor)
   async findAll() {
-    try {
-      return await this.donationService.findAll();
-    } catch (error) {
-      throw new CustomException(
-        'error has accord',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        { details: error },
-      );
-    }
+    return await this.donationService.findAll();
   }
 
   @Get(':id')
   @UseInterceptors(CacheInterceptor)
   async findOne(@Param('id') id: string) {
-    try {
-      return await this.donationService.findOne(id);
-    } catch (error) {
-      throw new CustomException(
-        'error has accord',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        { details: error },
-      );
-    }
+    return await this.donationService.findOne(id);
   }
 
   @UsePipes(new ZodValidationPipe(createDonationSchema))
   @Post()
   async create(@Body() createDonationDto: CreateDonationDto) {
-    try {
-      return this.donationService.create(createDonationDto);
-    } catch (error) {
-      throw new CustomException(
-        'error has accord',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        { details: error },
-      );
-    }
+    return this.donationService.create(createDonationDto);
   }
 }

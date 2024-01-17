@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Donation } from './schemas/donation.schema';
 import { Model } from 'mongoose';
@@ -21,11 +21,16 @@ export class DonationsService {
   }
 
   async findAll() {
-    return this.donationModel.find().exec();
+    const allProducts = await this.donationModel.find().exec();
+    return allProducts;
   }
 
   async findOne(id) {
-    const donationFromDB = this.donationModel.findById(id);
-    return donationFromDB;
+    try {
+      const donationFromDB = await this.donationModel.findById(id);
+      return donationFromDB;
+    } catch (error) {
+      throw new NotFoundException('Item not found');
+    }
   }
 }

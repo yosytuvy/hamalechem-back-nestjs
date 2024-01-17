@@ -22,10 +22,11 @@ export class LoggerMiddleware implements NestMiddleware {
 
       next();
 
-      // Response logging
-      console.log(`Status: ${res.statusCode}`);
-
-      console.log('----------------------------------------------');
+      res.on('finish', () => {
+        // Response logging
+        console.log(`Status: ${res.statusCode}`);
+        console.log('----------------------------------------------');
+      });
     }
   }
 }

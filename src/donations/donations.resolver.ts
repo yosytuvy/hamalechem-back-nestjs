@@ -7,7 +7,7 @@ import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { RoleGuard, Roles } from 'src/auth/guards/role.guard';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { GraphQlInterceptor } from './interceptors/graphQL.interceptor';
-import { GraphQlcecheKey } from './decorators/graphQLCecheKey.decorator';
+import { GraphQlCecheKey } from './decorators/graphQLCecheKey.decorator';
 
 @Resolver((of) => Donation)
 export class DonationsResolver {
@@ -16,7 +16,7 @@ export class DonationsResolver {
   @Query((returns) => Donation)
   @UseGuards(JwtGuard, new RoleGuard(Roles.SOLIDER))
   @UseInterceptors(GraphQlInterceptor)
-  @GraphQlcecheKey('donation')
+  @GraphQlCecheKey('donation')
   async donation(@Args('_id', { type: () => ID }) _id: string) {
     return this.donationsService.findOne(_id);
   }
@@ -29,6 +29,7 @@ export class DonationsResolver {
   }
 
   @Mutation((returns) => Donation)
+  @UseGuards(JwtGuard, new RoleGuard(Roles.SOLIDER))
   async addDonation(@Args('addDonation') addDonation: addDonationInput) {
     return this.donationsService.create(addDonation);
   }
