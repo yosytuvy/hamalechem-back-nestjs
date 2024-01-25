@@ -17,7 +17,7 @@ export class RoleGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const ctx = GqlExecutionContext.create(context).getContext();
     const { userType } = ctx.user;
-    if (userType === this.role) return true;
+    if (userType === this.role || userType === Roles.ADMIN) return true;
     return false;
   }
 }

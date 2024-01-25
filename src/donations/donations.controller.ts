@@ -32,10 +32,4 @@ export class DonationsController {
   async findOne(@Param('id') id: string) {
     return await this.donationService.findOne(id);
   }
-
-  @UsePipes(new ZodValidationPipe(createDonationSchema))
-  @Post()
-  async create(@Body() createDonationDto: CreateDonationDto) {
-    return this.donationService.create(createDonationDto);
-  }
 }

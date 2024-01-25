@@ -3,7 +3,6 @@ export class CreateDonationDto {
   category: string;
   image: string;
   location: string;
-  publisherId: string;
   phone: string;
   details: string;
   flexible: boolean;

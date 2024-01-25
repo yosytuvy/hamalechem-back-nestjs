@@ -23,6 +23,17 @@ import PostgresModule from './dal/postgres.options';
       autoSchemaFile: 'schema.graphql',
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
+
+      // formatError:(error) => {
+      //   const graphQLFromattedError = {
+      //     message:
+      //       error.extensions.exception?.response?.message || error.message,
+      //     code:
+      //       error.extensions?.code || "SERVER_ERROR",
+      //     name: error.extensions?.exception?.name || error.name,
+      //   };
+      //   return graphQLFromattedError;
+      // },
     }),
 
     // Setup Mongo
