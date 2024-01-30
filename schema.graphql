@@ -15,9 +15,24 @@ type Donation {
   flexible: Boolean!
 }
 
+"""Request model"""
+type Request {
+  _id: ID!
+  name: String!
+  category: String!
+  image: String!
+  location: String!
+  publisherId: String!
+  phone: String!
+  details: String!
+  flexible: Boolean!
+}
+
 type Query {
   donations: [Donation!]!
   donation(_id: ID!): Donation!
+  requests: [Request!]!
+  request(_id: ID!): Request!
 }
 
 type Mutation {

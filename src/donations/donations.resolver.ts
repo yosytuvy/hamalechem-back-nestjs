@@ -7,8 +7,8 @@ import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { RoleGuard, Roles } from 'src/auth/guards/role.guard';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { GraphQlInterceptor } from './interceptors/graphQL.interceptor';
-import { GraphQlCecheKey } from './decorators/graphQLCecheKey.decorator';
+import { GraphQlInterceptor } from '../common/interceptors/graphQL.interceptor';
+import { GraphQlCecheKey } from '../common/decorators/graphQLCecheKey.decorator';
 import { GraphQLError } from 'graphql';
 
 @Resolver((of) => Donation)

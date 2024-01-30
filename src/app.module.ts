@@ -8,6 +8,7 @@ import 'dotenv/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { RequestsModule } from './requests/requests.module';
 import RedisModule from './dal/redis.options';
 import MongoModule from './dal/mongo.options';
 import PostgresModule from './dal/postgres.options';
@@ -49,6 +50,7 @@ import PostgresModule from './dal/postgres.options';
     DonationsModule,
     AuthModule,
     UsersModule,
+    RequestsModule,
   ],
   controllers: [],
   providers: [],
